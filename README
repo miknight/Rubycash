@@ -1,0 +1,18 @@
+Rubycash - Automate daily tasks for RewardsCentral.com.au & MyOpinions.com.au
+
+RewardsCentral Features:
+* Quick Quiz
+* Guessing Game
+* Reading RewardMail
+* Web Clicks
+* Bonus Web Clicks
+
+MyOpinions Features:
+* Quick Survey
+* Instant Win Prize
+
+Requirements:
+*  The mechanize gem <http://github.com/tenderlove/mechanize/>
+
+
+Note: These scripts may be a violation of the RewardsCentral/MyOpinions Terms of Service. Use at your own risk.
