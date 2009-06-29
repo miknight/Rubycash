@@ -68,12 +68,12 @@ class RewardsCentral < Rubycash
 		# `result' is now an iframe
 		real_links = result.body.scan(/src="(.+?)"/).flatten;
 		real_click = real_links[0]
-		real_click2 = real_links[1]
-		page = fetchPage('/earn/' + real_click, 'Clicking real URL...')
-		wait = 8 # wait 10 seconds before we phone home (8 is really enough though)
-		page2 = fetchPage(real_click2, "Waiting #{wait} seconds...")
+		# This page is the top iframe that counts down from 10 and then reloads.
+		# Wait 10 seconds before we phone home (8 is really enough though).
+		wait = 8
+		page = fetchPage('/earn/' + real_click, "Waiting #{wait} seconds...")
 		sleep(wait)
-		return page.forms.first.submit()
+		return fetchPage('/earn/' + real_click, 'Reporting link has been clicked...')
 	end
 
 	def doGuessingGame()
