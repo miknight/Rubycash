@@ -118,7 +118,7 @@ class RewardsCentral < Rubycash
 			end
 		end
 		# look for the rows that are unread
-		rows = page.body.scan(/<tr>.+Unread.+?<\/tr>/im)
+		rows = page.body.scan(/<tr>.+?<strong>.+?<\/tr>/im)
 		rows.each do |row|
 			# find which links are for unread Reward Mail only
 			rlinks.each do |link|
@@ -133,7 +133,7 @@ class RewardsCentral < Rubycash
 		elinks = []
 		# find the link that will earn us points
 		page.links.each do |link|
-			if link.href =~ /(\/Earn\/to.aspx\?uid=[\w-]+&aid=[\w-]+&email=0)/i
+			if link.href =~ /(\/Earn\/to.aspx\?uid=[\w-]+&aid=[\w-]+&email=0&rtype=1)/i
 				fetchPage($1, 'Clicking Reward Mail points link: ' + link.href)
 				break
 			end
