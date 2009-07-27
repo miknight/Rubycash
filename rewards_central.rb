@@ -12,7 +12,7 @@ class RewardsCentral < Rubycash
 	def doQuickQuiz()
 		page = fetchPage('/earn/QuickSurvey.aspx', 'Getting Quick Quiz page...')
 		form = page.forms.first
-		if page.body =~ /You have already earned points for/
+		if page.body =~ /You have already/
 			log('Quiz already completed.')
 			return
 		end
@@ -34,7 +34,7 @@ class RewardsCentral < Rubycash
 
 	def doWebClick()
 		page = fetchPage('/earn/WebClicks.aspx', 'Getting Web Clicks page...')
-		if page.body =~ /You have already earned points for/
+		if page.body =~ /You have already/
 			log('Web Click already completed.')
 			return
 		end
@@ -85,9 +85,9 @@ class RewardsCentral < Rubycash
 			log('Guessing Game already completed.')
 			return
 		end
-		# generate seven numbers between 1 to 1000
+		# generate seven numbers between 1 to 10,000
 		numbers = []
-		7.times { numbers.push(1 + rand(999)) }
+		7.times { numbers.push(1 + rand(9999)) }
 		# load numbers into form
 		num_loaded = 0;
 		for i in (0..6)
@@ -118,7 +118,7 @@ class RewardsCentral < Rubycash
 			end
 		end
 		# look for the rows that are unread
-		rows = page.body.scan(/<tr>.+?<strong>.+?<\/tr>/im)
+		rows = page.body.scan(/<tr>.+?<strong>[^<]+<\/strong>.+?<\/tr>/im)
 		rows.each do |row|
 			# find which links are for unread Reward Mail only
 			rlinks.each do |link|
