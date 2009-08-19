@@ -133,7 +133,7 @@ class RewardsCentral < Rubycash
 		elinks = []
 		# find the link that will earn us points
 		page.links.each do |link|
-			if link.href =~ /(\/Earn\/to.aspx\?uid=[\w-]+&aid=[\w-]+&email=0&rtype=1)/i
+			if link.href =~ /(\/Earn\/to.aspx\?uid=[\w-]+&aid=[\w-]+.*&rtype=1)/i
 				fetchPage($1, 'Clicking Reward Mail points link: ' + link.href)
 				break
 			end
