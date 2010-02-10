@@ -9,7 +9,7 @@ class Rubycash
 	def initialize(username, password, user_agent_alias='Mac Safari')
 		@username = username
 		@password = password
-		@agent = WWW::Mechanize.new()
+		@agent = Mechanize.new()
 		@agent.user_agent_alias = user_agent_alias
 	end
 
