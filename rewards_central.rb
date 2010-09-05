@@ -53,6 +53,23 @@ class RewardsCentral < Rubycash
 		end
 	end
 
+	def doRandomBonus()
+		page = fetchPage('/earn/randomMemberBonus.aspx', 'Getting Random Member Bonus page...')
+		if page.body =~ /You have already/
+			log('Random Member Bonus already completed or not available.')
+			return
+		end
+		# Not sure what to check for if it's not available today.
+		# The link will look something like this:
+		# $.post('/earn/WebClicksBanner.aspx?bid=1&code=jARbDIO%2fXx3CH5XvE8C2Yg%3d%3d', function(){} );
+		if page.body !~ /(\/earn\/WebClicksBanner\.aspx\?[^']+)/
+			puts "No Random Member Bonus link detected."
+			return
+		end
+		link = $1
+		fetchPage(link, "Visiting random bonus link: " + link)
+	end
+
 	def scrapeLinks(page)
 		links = []
 		page.links.each do |link|
@@ -142,6 +159,7 @@ class RewardsCentral < Rubycash
 
 	def doDailyRun()
 		login()
+		doRandomBonus()
 		doQuickQuiz()
 		doGuessingGame()
 		doRewardMail()
