@@ -159,12 +159,12 @@ class RewardsCentral < Rubycash
 
 	def doDailyRun()
 		login()
-		doRandomBonus()
 		doQuickQuiz()
 		doGuessingGame()
 		doRewardMail()
 		doWebClick()
 		doBonusClicks()
+		doRandomBonus()
 	end
 
 end
