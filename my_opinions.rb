@@ -11,7 +11,7 @@ class MyOpinions < Rubycash
 
 	def doQuickSurvey()
 		page = fetchPage('/', 'Getting Home Page to check for Quick Surveys...')
-		if page.body =~ /You have (\d+) Quick Surveys available/ and $1.to_i > 0
+		if page.body =~ /You have (\d+) Quick Surveys? available/i and $1.to_i > 0
 			log("There are #{$1} Quick Surveys left to do.")
 		else
 			log('All Quick Surveys have been completed.')
