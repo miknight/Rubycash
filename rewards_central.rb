@@ -147,12 +147,32 @@ class RewardsCentral < Rubycash
 	def readRewardMail(path)
 		# fetch the Reward Mail
 		page = fetchPage(path, 'Visiting Reward Mail at ' + @base_url + path)
-		elinks = []
 		# find the link that will earn us points
 		page.links.each do |link|
 			if link.href =~ /(\/Earn\/to.aspx\?uid=[\w-]+&aid=[\w-]+.*&rtype=1)/i
 				fetchPage($1, 'Clicking Reward Mail points link: ' + link.href)
 				break
+			end
+		end
+	end
+
+	def doAlerts()
+		base = '/Earn/'
+		page = fetchPage(base + 'myalerts.aspx', 'Getting My Alerts page...')
+		# find the alert links
+		page.links.each do |link|
+			if link.href =~ /(myalertsView\.aspx\?ctype=[\d]+&uid=[\w-]+&aid=[\w-]+)[^>]*?font-weight:bold/i
+				alert_page = fetchPage(base + $1, 'Clicking My Alerts link: ' + @base_url + base + link.href)
+				if alert_page.body =~ /earn\.css/
+					# it's an alert we gain something from rather than a sponsored one
+					if alert_page.body =~ /You have already collected/
+						puts "Already collected reward."
+					else
+						puts submitForm(alert_page.forms.first, 'Collecting alert reward.', 'ImageButton1').inspect
+					end
+				else
+					puts "Skipping sponsored alert."
+				end
 			end
 		end
 	end
@@ -165,6 +185,7 @@ class RewardsCentral < Rubycash
 		doWebClick()
 		doBonusClicks()
 		doRandomBonus()
+		doAlerts()
 	end
 
 end
