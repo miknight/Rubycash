@@ -160,19 +160,25 @@ class RewardsCentral < Rubycash
 		base = '/Earn/'
 		page = fetchPage(base + 'myalerts.aspx', 'Getting My Alerts page...')
 		# find the alert links
-		page.links.each do |link|
-			if link.href =~ /(myalertsView\.aspx\?ctype=[\d]+&uid=[\w-]+&aid=[\w-]+)[^>]*?font-weight:bold/i
-				alert_page = fetchPage(base + $1, 'Clicking My Alerts link: ' + @base_url + base + link.href)
-				if alert_page.body =~ /earn\.css/
-					# it's an alert we gain something from rather than a sponsored one
-					if alert_page.body =~ /You have already collected/
-						puts "Already collected reward."
-					else
-						puts submitForm(alert_page.forms.first, 'Collecting alert reward.', 'ImageButton1').inspect
-					end
+		new_alert_links = page.links.select do |link|
+			link.href =~ /(myalertsview\.aspx\?ctype=[\d]+&uid=[\w-]+&aid=[\w-]+)/i and
+				link.attributes.find { |attr| attr[0] == 'style' }[1] =~ /bold/i
+		end
+		if new_alert_links.length == 0
+			puts "No new alerts."
+			return
+		end
+		new_alert_links.each do |link|
+			alert_page = fetchPage(base + link.href, 'Clicking My Alerts link: ' + @base_url + base + link.href)
+			if alert_page.body =~ /earn\.css/ or alert_page.body =~ /Surprise Bonus/i
+				# check if it's an alert we gain something from
+				if alert_page.body =~ /You have already collected/
+					puts "Already collected reward."
 				else
-					puts "Skipping sponsored alert."
+					submitForm(alert_page.forms.first, 'Collecting alert reward.', alert_page.forms.first.buttons.first.name)
 				end
+			else
+				puts "Skipping sponsored alert."
 			end
 		end
 	end
