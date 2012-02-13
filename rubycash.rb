@@ -83,7 +83,12 @@ class Rubycash
 		config = YAML::load_file(File.dirname(__FILE__) + '/config.yml')
 		config['accounts'].each do |user|
 			my_site = self.new(user['username'], user['password'])
-			my_site.doDailyRun()
+			begin
+			  my_site.doDailyRun()
+			rescue Exception => e
+			  puts e
+			  print e.backtrace.join("\n")
+		  end
 		end
 	end
 
