@@ -70,7 +70,7 @@ class Rubycash
 		setMatchField(form, '$mainContent$txtEmail', @username)
 		setMatchField(form, '$mainContent$txtPassword', @password)
 		result = submitForm(form, "Submitting login form (as #{@username})...", '$mainContent$btnSignIn')
-		if result.body !~ /signedInInfoLeft/
+		if result.body !~ /Account Settings/
 			raise "Login failed."
 		end
 	end
