@@ -94,7 +94,7 @@ class RewardsCentral < Rubycash
 	end
 
 	def doGuessingGame()
-		page = fetchPage('/community/GuessingGame.aspx', 'Getting Guessing Game page...')
+		page = fetchPage('/earn/GuessingGame.aspx', 'Getting Guessing Game page...')
 		form = page.forms.first
 		gg_button = 'ctl00$mainContent$btnSubmitGuessing'
 		# has the field already been filled in?
