@@ -34,8 +34,8 @@ class RewardsCentral < Rubycash
 
 	def doWebClick()
 		page = fetchPage('/earn/WebClicks.aspx', 'Getting Web Clicks page...')
-		if page.body =~ /You have already/
-			log('Web Click already completed.')
+		if page.body =~ /You have already/ or page.body =~ /no ads available/
+			log('Web Click already completed or not available.')
 			return
 		end
 		links = scrapeLinks(page)
