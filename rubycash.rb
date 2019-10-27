@@ -2,6 +2,7 @@
 
 require 'yaml'
 require 'rubygems'
+require 'bundler/setup'
 require 'mechanize'
 
 class Rubycash

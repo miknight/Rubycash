@@ -12,11 +12,11 @@ MyOpinions Features:
 * Instant Win Prize
 
 Requirements:
-*  The mechanize gem <http://github.com/tenderlove/mechanize/>
+* bundler (`gem install bundler`)
+* Run `bundle install`
 
 Usage:
 * Fill out your account details in config.yml.
-* chmod +x rewards_central.rb my_opinions.rb
-* ./rewards_central.rb && ./my_opinions.rb
+* Run `bundle exec './rewards_central.rb && ./my_opinions.rb'`
 
 Note: These scripts may be a violation of the RewardsCentral/MyOpinions Terms of Service if used incorrectly. Use at your own risk.
