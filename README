@@ -1,4 +1,4 @@
-Rubycash - Automate daily tasks for RewardsCentral.com.au & MyOpinions.com.au
+Rubycash - Automate daily tasks for RewardsCentral.com.au
 
 RewardsCentral Features:
 * Quick Quiz
@@ -7,16 +7,12 @@ RewardsCentral Features:
 * Web Clicks
 * Bonus Web Clicks
 
-MyOpinions Features:
-* Quick Survey
-* Instant Win Prize
-
 Requirements:
 * bundler (`gem install bundler`)
 * Run `bundle install`
 
 Usage:
 * Fill out your account details in config.yml.
-* Run `bundle exec './rewards_central.rb && ./my_opinions.rb'`
+* Run `bundle exec './rewards_central.rb'`
 
-Note: These scripts may be a violation of the RewardsCentral/MyOpinions Terms of Service if used incorrectly. Use at your own risk.
+Note: These scripts may be a violation of the RewardsCentral Terms of Service if used incorrectly. Use at your own risk.
