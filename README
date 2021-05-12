@@ -4,8 +4,6 @@ RewardsCentral Features:
 * Quick Quiz
 * Guessing Game
 * Reading RewardMail
-* Web Clicks
-* Bonus Web Clicks
 
 Requirements:
 * bundler (`gem install bundler`)
@@ -13,6 +11,6 @@ Requirements:
 
 Usage:
 * Fill out your account details in config.yml.
-* Run `bundle exec './rewards_central.rb'`
+* Run `bundle exec rewards_central.rb`
 
 Note: These scripts may be a violation of the RewardsCentral Terms of Service if used incorrectly. Use at your own risk.
