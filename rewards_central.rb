@@ -11,7 +11,11 @@ class RewardsCentral < Rubycash
 
 	def doQuickQuiz()
 		page = fetchPage('/earn/QuickSurvey.aspx', 'Getting Quick Quiz page...')
-		form = page.forms.first
+		form = page.forms_with(action: 'quicksurvey.aspx').first
+		if form.nil?
+			log('ERROR: Quiz form cannot be found.')
+			return
+		end
 		if page.body =~ /You have already/
 			log('Quiz already completed.')
 			return
@@ -25,7 +29,7 @@ class RewardsCentral < Rubycash
 		end
 		# if there are no radios or checkboxes, there's probably no question for today
 		result = submitForm(form, 'Submitting Quick Quiz form...', 'ctl00$mainContent$QuickSurvey1$btnSubmit')
-		if result.body =~ /Thank you for your answer/
+		if result.body =~ /You have been credited/
 			log('Quiz completed successfully!')
 		else
 			log('Unable to verify if Quiz completed succesfully.')
